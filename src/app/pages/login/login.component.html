@@ -1,0 +1,25 @@
+
+<form [formGroup]="formulario" (ngSubmit)="login()">
+    <div class="form-group">
+        <div>
+            <label for="usuario">Usuário</label>
+            <input type="checkbox" id="usuario" formControlName="usuario">
+        </div>
+        <div>
+            <label for="terapeuta">Terapeuta</label>
+            <input type="checkbox" id="terapeuta" formControlName="terapeuta">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email">
+    </div>
+    <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="senha" class="form-control" id="senha" formControlName="senha">
+    </div>
+    <button type="submit" [disabled]="!formulario.valid" class="btn btn-primary">Login</button>
+</form>
+
+<p>Form Status: {{ formulario.status }}</p>
