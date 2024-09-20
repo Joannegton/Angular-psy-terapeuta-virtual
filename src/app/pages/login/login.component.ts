@@ -7,11 +7,12 @@ import {
 } from '@angular/forms';
 
 import { InputComponent } from '../../components/input/input.component';
+import { ButtonComponent } from "../../components/button/button.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [InputComponent, ReactiveFormsModule],
+  imports: [InputComponent, ReactiveFormsModule, ButtonComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
@@ -55,7 +56,8 @@ export class LoginComponent {
       : `${baseUrl}/api/v1/profissionais/login`;
 
     try {
-      let response = await fetch(url, {
+      let response = await fetch(
+        url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,7 +70,11 @@ export class LoginComponent {
 
       if (response.status === 200) {
         let data = await response.json();
-        console.log('Response Data:', data);
+        //salvar os dados
+        localStorage.setItem('usuario', data.usuario);
+        localStorage.setItem('terapeuta', data.terapeuta);
+        //redirecionar para a página de dashboard
+        //window.location.href = '/dashboard';
       } else {
         alert('Usuario ou senha incorretos');
       }
@@ -76,4 +82,6 @@ export class LoginComponent {
       console.error('Erro na requisição:', error);
     }
   }
+
+  
 }
